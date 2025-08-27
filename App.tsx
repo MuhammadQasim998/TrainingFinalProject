@@ -1,44 +1,40 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- */
+import React from 'react';
+import { SafeAreaView, StyleSheet } from 'react-native';
+import { LocationProvider } from './app/provider/LocationProvider';
+import MapScreen from './app/screens/MapScreen';
 
-import { NewAppScreen } from '@react-native/new-app-screen';
-import { StatusBar, StyleSheet, useColorScheme, View } from 'react-native';
-import {
-  SafeAreaProvider,
-  useSafeAreaInsets,
-} from 'react-native-safe-area-context';
-
-function App() {
-  const isDarkMode = useColorScheme() === 'dark';
-
+const App = () => {
   return (
-    <SafeAreaProvider>
-      <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-      <AppContent />
-    </SafeAreaProvider>
+    <LocationProvider>
+      <SafeAreaView style={styles.safeArea}>
+        <MapScreen />
+      </SafeAreaView>
+    </LocationProvider>
   );
-}
-
-function AppContent() {
-  const safeAreaInsets = useSafeAreaInsets();
-
-  return (
-    <View style={styles.container}>
-      <NewAppScreen
-        templateFileName="App.tsx"
-        safeAreaInsets={safeAreaInsets}
-      />
-    </View>
-  );
-}
+};
 
 const styles = StyleSheet.create({
+  safeArea: {
+    flex: 1,
+    backgroundColor: '#fff',
+  },
   container: {
     flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 20,
+  },
+  text: {
+    fontSize: 16,
+    textAlign: 'center',
+    marginBottom: 20,
+  },
+  coordinates: {
+    fontSize: 14,
+    textAlign: 'center',
+    marginBottom: 20,
+    fontFamily: 'monospace',
+    color: '#666',
   },
 });
 
